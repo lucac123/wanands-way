@@ -1,1 +1,3 @@
-node_modules
+### AYO ON WANAND ###
+## WANANDS WAY ##
+# KINDA GOOD #
