@@ -1,3 +1,3 @@
-### AYO ON WANAND ###
+# AYO ON WANAND #
 ## WANANDS WAY ##
-# KINDA GOOD #
+### KINDA GOOD ###
