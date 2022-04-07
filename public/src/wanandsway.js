@@ -1,4 +1,4 @@
-import { World } from 'src/world.js';
+import { World } from './world.js';
 
 // * ALIASES
 const Application = PIXI.Application,
@@ -26,10 +26,7 @@ let state;
 let map;
 
 let setup = () => {
-	// $('#console').text('set up');
-	// map = new World(app);
-	// $('#console').text('got here');
-	
+	let world = new World();
 	state = single_player;
 	app.ticker.add(game_loop);
 }

@@ -1,0 +1,25 @@
+{
+  "name": "wanands-way",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucac123/wanands-way.git"
+  },
+  "keywords": [],
+  "author": "Luca Chackalackal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucac123/wanands-way/issues"
+  },
+  "homepage": "https://github.com/lucac123/wanands-way#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "socket.io": "^4.4.1"
+  }
+}
