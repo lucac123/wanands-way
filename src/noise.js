@@ -1,7 +1,13 @@
-const m = 4294967296, //2^32, period of pseudorandom runction
-	  a = 1664525, //seed value should be between 0 and modulus-1
-	  c = 1;
-
+// const m = 65537,
+// 	  a = 75,
+// 	  c = 74;
+// const m = 4294967296, //2^32, period of pseudorandom runction
+// 	  a = 1664525, //seed value should be between 0 and modulus-1
+// 	  c = 1;
+const m = 2147483647, //made m prime for computation
+	  a = 48271,
+	  c = 0;
+	  
 const grid_size = 5;
 
 class Noise {
@@ -17,24 +23,29 @@ class Noise {
 
 	
 	perlin(x, count) {
+		console.time('rand_x');
 		for (let i = 0; i < count; i++) {
-			console.log(`${this.rand()} \t ${this.rand_x(i+1)}`)
+			this.rand_x(i);
 		}
+		console.timeEnd('rand_x');
+		console.time('rand');
+		for (let i = 0; i < count; i++) {
+			// console.log(`${this.rand()} \t ${this.rand_x(i+1)}`);
+			this.rand();
+		}
+		console.timeEnd('rand');
 	}
 
-	rand_x(coord) {
-		let a_k = this.mod_pow(a, coord, m);
-		let seed = this.seed % m;
-		let xnk = ((a_k*seed) % m + (a_k - 1)*c/(a-1) % m) % m;
-		return xnk / m;
+	rand_x(k) {
+		return this.mod_pow(a, k, m) * (this.seed % m) % m;
 	}
 
 	rand(rand_seed) {
 		if (rand_seed === undefined) {
-			this.x = (a * this.x + c) % m;
-			return this.x/m;
+			this.x = (a * this.x) % m;
+			return this.x;
 		}
-		return ((a * rand_seed + c) % m) / m;
+		return ((a * rand_seed) % m) / m;
 	}
 	interpolate(y1, y2, x) {
 		let x2 = (1 - Math.cos(x*Math.PI))/2;
@@ -45,8 +56,10 @@ class Noise {
 		if (mod == 1)
 			return 0;
 		let c = 1;
-		for (let i = 0; i < exp -1; i++)
+		for (let i = 0; i < exp; i++) {
 			c = (c*base) % mod;
+			// console.log(`e' = ${i}, c=${c}, `)
+		}
 		
 		return c;
 	}
