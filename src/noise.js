@@ -11,29 +11,23 @@ const m = 2147483647, //made m prime for computation
 const grid_size = 5;
 
 class Noise {
-	seed;
-	x;
-
-	values = [];
-
 	constructor(seed) {
+		this.points = [];
+		$('#console').append('<br/>constructing noise');
 		this.seed = seed;
 		this.x = seed;
+		$('#console').append('<br/>set instance variables');
+		this.points[0] = this.rand();
+		this.points[1] = this.rand();
+		$('#console').append('<br/>did this');
+		$('#console').append('<br/>finished constructor');
 	}
 
 	
-	perlin(x, count) {
-		console.time('rand_x');
-		for (let i = 0; i < count; i++) {
-			this.rand_x(i);
-		}
-		console.timeEnd('rand_x');
-		console.time('rand');
-		for (let i = 0; i < count; i++) {
-			// console.log(`${this.rand()} \t ${this.rand_x(i+1)}`);
-			this.rand();
-		}
-		console.timeEnd('rand');
+	perlin(x) {
+		let first = Math.floor(x/5);
+		let second = Math.ceil(x/5);
+		$('#console').append(`<br/>ayo ${this.rand()}`);
 	}
 
 	rand_x(k) {
@@ -58,9 +52,7 @@ class Noise {
 		let c = 1;
 		for (let i = 0; i < exp; i++) {
 			c = (c*base) % mod;
-			// console.log(`e' = ${i}, c=${c}, `)
-		}
-		
+		}		
 		return c;
 	}
 }

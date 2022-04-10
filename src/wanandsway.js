@@ -12,6 +12,7 @@ PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 const app = new Application({
 	antialias: true,
 	resizeTo: window
+	// backgroundAlpha: 0.2
 });
 app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
@@ -23,10 +24,10 @@ document.body.appendChild(app.view);
 let state;
 
 // ** OBJECTS
-let map;
+let world;
 
 let setup = () => {
-	let world = new World();
+	world = new World();
 	state = single_player;
 	app.ticker.add(game_loop);
 }
@@ -40,5 +41,5 @@ let game_loop = (delta) => {
 }
 
 let single_player = (delta) => {
-	
+	world.draw();
 }
