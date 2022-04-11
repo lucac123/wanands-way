@@ -1,0 +1,7 @@
+export let	// * NOISE CONSTANTS
+			M = 2147483647,
+			A = 48271,
+
+			// * GAME CONSTANTS
+			SCALE = 3,
+			BLOCK = 16*SCALE;

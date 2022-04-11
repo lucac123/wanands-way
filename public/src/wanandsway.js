@@ -1,4 +1,5 @@
 import { World } from './world.js';
+import { SCALE, BLOCK } from './constants.js';
 
 // * ALIASES
 const Application = PIXI.Application,
@@ -27,7 +28,7 @@ let state;
 let world;
 
 let setup = () => {
-	world = new World();
+	world = new World(app);
 	state = single_player;
 	app.ticker.add(game_loop);
 }
