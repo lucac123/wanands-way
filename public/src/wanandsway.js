@@ -1,16 +1,10 @@
 import { World } from './world.js';
-import { SCALE, BLOCK } from './constants.js';
+import { game, pixi } from './constants.js';
 
-// * ALIASES
-const Application = PIXI.Application,
-	Container = PIXI.Container,
-	loader = PIXI.Loader.shared,
-	TextureCache = PIXI.utils.TextureCache,
-	Sprite = PIXI.Sprite;
 
 // * CREATE APPLICATION
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-const app = new Application({
+const app = new pixi.application({
 	antialias: true,
 	resizeTo: window
 	// backgroundAlpha: 0.2
@@ -33,7 +27,7 @@ let setup = () => {
 	app.ticker.add(game_loop);
 }
 
-loader
+pixi.loader
 	.add('images/assets.json')
 	.load(setup);
 
