@@ -9,7 +9,8 @@ let prng = {
 // * GAME CONSTANTS
 let game = {
 	scale: 3,
-	block: 16
+	block: 16,
+	grass_threshold: 0.6
 }
 
 // * PIXI ALIASES

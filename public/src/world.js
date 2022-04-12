@@ -14,34 +14,40 @@ class World {
 		this.app_height = app.renderer.height;
 		this.height = 0;
 
-		for (let i = 0; i < 50; i++) {
+		this.app.stage.addChild(this.map);
+	}
+
+	fill_stage() {
+		for (let i = 0; i < this.app_height/(game.block*game.scale); i++) {
 			let n = this.noise.rand();
-			if (n > 0.6) {
+			if (n > game.grass_threshold) {
 				this.draw_row('grass.png');
 			}
 			else {
 				let road_size = 0;
-				while ((n = this.noise.rand()) <= 0.6)
+				while ((n = this.noise.rand()) <= game.grass_threshold)
 					road_size++;
-				if (road_size == 1)
-					this.draw_row('road_one_lane.png');
-				else {
-					this.draw_row('road_bot_lane.png');
-					for (let j = 0; j < road_size-2; j++)
-						this.draw_row('road_mid_lane.png');
-					this.draw_row('road_top_lane.png');
-				}
+				this.draw_road(road_size);
 				this.draw_row('grass.png');
 			}
 		}
-
-		this.app.stage.addChild(this.map);
 	}
 	
 	draw() {
 		this.map.position.y+=5;
 	}
 
+	draw_road(road_size) {
+		if (road_size == 1)
+			this.draw_row('road_one_lane.png');
+		else {
+			this.draw_row('road_bot_lane.png');
+			for (let j = 0; j < road_size-2; j++)
+				this.draw_row('road_mid_lane.png');
+			this.draw_row('road_top_lane.png');
+		}
+	}
+	
 	draw_row(name) {
 		let sprite = new pixi.tiling_sprite(pixi.textures[name], this.app_width, game.block);
 		sprite.scale.y = game.scale;
