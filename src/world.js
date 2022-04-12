@@ -1,4 +1,5 @@
 import { Noise } from './noise.js';
+import { Key } from './keyboard.js';
 import { prng, game, pixi } from './constants.js';
 
 export { World };
@@ -12,31 +13,49 @@ class World {
 		this.map = new pixi.container();
 		this.app_width = app.renderer.width;
 		this.app_height = app.renderer.height;
+		this.block_height = this.app_height/(game.block*game.scale);
 		this.height = 0;
 
+		this.fill_stage();
+		
 		this.app.stage.addChild(this.map);
 	}
 
 	fill_stage() {
-		for (let i = 0; i < this.app_height/(game.block*game.scale); i++) {
-			let n = this.noise.rand();
-			if (n > game.grass_threshold) {
-				this.draw_row('grass.png');
-			}
-			else {
-				let road_size = 0;
-				while ((n = this.noise.rand()) <= game.grass_threshold)
-					road_size++;
-				this.draw_road(road_size);
-				this.draw_row('grass.png');
-			}
+		while (this.height < this.block_height)
+			this.gen_row();
+	}
+	
+	move_up() {
+		this.map.y++;
+		this.cull_rows();
+	}
+
+	cull_rows() {
+		let children = this.map.children();
+		children.forEach((sprite) => {
+			if (sprite.y > this.app_height)
+				sprite.destroy();
+		});
+
+		if (children[children.length-1].y > 0-game.scale*game.block)
+			gen_row();
+	}
+
+	gen_row() {
+		let n = this.noise.rand();
+		if (n > game.grass_threshold) {
+			this.draw_row('grass.png');
+		}
+		else {
+			let road_size = 1;
+			while ((n = this.noise.rand()) <= game.grass_threshold)
+				road_size++;
+			this.draw_road(road_size);
+			this.draw_row('grass.png');
 		}
 	}
 	
-	draw() {
-		this.map.position.y+=5;
-	}
-
 	draw_road(road_size) {
 		if (road_size == 1)
 			this.draw_row('road_one_lane.png');
@@ -50,9 +69,10 @@ class World {
 	
 	draw_row(name) {
 		let sprite = new pixi.tiling_sprite(pixi.textures[name], this.app_width, game.block);
-		sprite.scale.y = game.scale;
-		sprite.position.y = this.app_height - (this.height+1) * game.scale * game.block;
 		this.map.addChild(sprite);
+		sprite.scale.y = game.scale;
+		sprite.y = this.app_height - (this.height+1) * game.scale * game.block;
+
 		this.height++;
 	}
 }
