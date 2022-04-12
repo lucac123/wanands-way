@@ -36,5 +36,5 @@ let game_loop = (delta) => {
 }
 
 let single_player = (delta) => {
-	world.draw();
+	world.move_up();
 }

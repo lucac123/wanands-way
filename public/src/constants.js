@@ -1,20 +1,20 @@
 export { prng, game, pixi };
 
 // * NOISE CONSTANTS
-let prng = {
+const prng = {
 	m: 2147483647,
 	a: 48271
 }
 
 // * GAME CONSTANTS
-let game = {
+const game = {
 	scale: 3,
 	block: 16,
 	grass_threshold: 0.6
 }
 
 // * PIXI ALIASES
-let pixi = {
+const pixi = {
 	application: PIXI.Application,
 	container: PIXI.Container,
 	textures: PIXI.utils.TextureCache,
