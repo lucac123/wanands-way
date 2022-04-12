@@ -1,7 +1,6 @@
-import {M, A} from './constants.js';
+import { prng } from './constants.js';
 
 export {Noise};
-	  
 
 class Noise {
 	constructor(seed) {
@@ -15,16 +14,16 @@ class Noise {
 	// * RETURNS RANDOM VALUE FROM INDEX k USING EXPLICIT FORMULA
 	// ** It works but is inefficient
 	rand_x(k) {
-		return this.mod_pow(A, k, M) * (this.seed % M) % M / M;
+		return this.mod_pow(prng.a, k, prng.m) * (this.seed % prng.m) % prng.m / prng.m;
 	}
 	
 	// * RETURNS NEXT RANDOM VALUE, OR CALCULATES NEXT BASED ON <rand_seed>
 	rand(rand_seed) {
 		if (rand_seed === undefined) {
-			this.x = (A * this.x) % M;
-			return this.x / M;
+			this.x = (prng.a * this.x) % prng.m;
+			return this.x / prng.m;
 		}
-		return ((A * rand_seed) % M) / M;
+		return ((prng.a * rand_seed) % prng.m) / prng.m;
 	}
 	
 	// * WORLD GEN BETTER WITHOUT PERLIN, REMOVED

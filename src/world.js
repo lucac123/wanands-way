@@ -1,19 +1,15 @@
 import { Noise } from './noise.js';
-import { SCALE, BLOCK, M } from './constants.js';
+import { prng, game, pixi } from './constants.js';
 
 export { World };
 
-// * ALIASES
-const Container = PIXI.Container,
-	TextureCache = PIXI.utils.TextureCache,
-	Sprite = PIXI.Sprite;
 
 class World {
 	constructor(app) {
-		this.seed = Math.floor(Math.random()*M);
+		this.seed = Math.floor(Math.random() * prng.m);
 		this.noise = new Noise(this.seed);
 		this.app = app;
-		this.map = new Container();
+		this.map = new pixi.container();
 		this.width = app.renderer.width;
 		this.height = app.renderer.height;
 		for (let i = 0; i < 100; i++) {
@@ -22,8 +18,8 @@ class World {
 	}
 	
 	draw() {
-		let car = new Sprite(TextureCache['road_bot_lane.png']);
-		car.scale.set(SCALE);
+		let car = new pixi.sprite(pixi.textures['road_bot_lane.png']);
+		car.scale.set(game.scale);
 		car.position.set(200, 200);
 		this.app.stage.addChild(car);
 
