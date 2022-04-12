@@ -9,8 +9,8 @@ let prng = {
 // * GAME CONSTANTS
 let game = {
 	scale: 3,
+	block: 16
 }
-game.block = 16 * game.scale
 
 // * PIXI ALIASES
 let pixi = {
@@ -18,5 +18,6 @@ let pixi = {
 	container: PIXI.Container,
 	textures: PIXI.utils.TextureCache,
 	loader: PIXI.Loader.shared,
-	sprite: PIXI.Sprite
+	sprite: PIXI.Sprite,
+	tiling_sprite: PIXI.TilingSprite
 }
