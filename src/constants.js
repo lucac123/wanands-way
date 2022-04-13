@@ -8,6 +8,7 @@ const prng = {
 
 // * GAME CONSTANTS
 const game = {
+	safe_start: 3,
 	scale: 3,
 	block: 16,
 	grass_threshold: 0.6
