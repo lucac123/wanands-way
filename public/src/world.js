@@ -41,8 +41,8 @@ class World {
 	loop() {
 		let player_height = this.player.sprite.getGlobalPosition().y;
 		let height = Math.floor(this.block_height * game.player_height);
-		if (player_height < this.app_height - height * game.scale * game.block - 10) {
-			this.world.y += ((this.app_height - height * game.scale * game.block - 10) - player_height)/30;
+		if (player_height < this.app_height - height * game.scale * game.block - 12) {
+			this.world.y += Math.max(0.5, ((this.app_height - height * game.scale * game.block - 12) - player_height)/30);
 			this.cull_rows();
 		}
 	}
