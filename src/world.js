@@ -12,6 +12,9 @@ class World {
 		this.noise = new Noise(this.seed);
 		this.app = app;
 		this.map = new pixi.container();
+		this.cars = new pixi.container();
+		this.cars._zIndex = 1;
+		
 		this.world = new pixi.container();
 		this.world.sortableChildren = true;
 		this.app_width = app.renderer.width;
@@ -37,8 +40,9 @@ class World {
 	
 	loop() {
 		let player_height = this.player.sprite.getGlobalPosition().y;
-		if (player_height < this.app_height - 5 * game.scale * game.block - 10) {
-			this.world.y += ((this.app_height - 5 * game.scale * game.block - 10) - player_height)/30;
+		let height = Math.floor(this.block_height * game.player_height);
+		if (player_height < this.app_height - height * game.scale * game.block - 10) {
+			this.world.y += ((this.app_height - height * game.scale * game.block - 10) - player_height)/30;
 			this.cull_rows();
 		}
 	}
@@ -80,12 +84,10 @@ class World {
 	}
 	
 	draw_row(name) {
-		let sprite = new pixi.tiling_sprite(pixi.textures[name], this.app_width, game.block);
+		let sprite = new pixi.tiling_sprite(pixi.textures[name], this.app_width/game.scale, game.block);
 		this.map.addChild(sprite);
-		sprite.scale.y = game.scale;
+		sprite.scale.set(game.scale, game.scale);
 		sprite.y = this.app_height - (this.height+1) * game.scale * game.block;
-		// sprite._zIndex = 0;
-
 		this.height++;
 	}
 }
