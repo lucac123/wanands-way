@@ -9,7 +9,7 @@ class Player {
 		this.sprite.scale.set(game.scale);
 		this.sprite.anchor.set(0.5, 1);
 		this.sprite.position.set(app.renderer.width/2, app.renderer.height -10);
-		this.sprite._zIndex = 1;
+		this.sprite._zIndex = 2;
 
 		this.up = new Key("ArrowUp");
 		this.right = new Key("ArrowRight");
