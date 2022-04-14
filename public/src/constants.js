@@ -12,8 +12,10 @@ const game = {
 	scale: 3,
 	block: 16,
 	grass_threshold: 0.6,
-	player_height: 0.3
+	player_height: 0.3,
+	player_pixel_height: 1
 }
+
 
 // * PIXI ALIASES
 const pixi = {

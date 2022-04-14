@@ -9,8 +9,8 @@ export { World };
 
 class World {
 	constructor(app) {
-		// this.seed = Math.floor(Math.random() * prng.m);
-		this.seed = 12039120;
+		this.seed = Math.floor(Math.random() * prng.m);
+		// this.seed = 12039120;
 		this.noise = new Noise(this.seed);
 		this.app = app;
 
@@ -50,8 +50,8 @@ class World {
 		this.cars.forEach((car) => car.move());
 		const player_height = this.player.sprite.getGlobalPosition().y;
 		const height = Math.floor(this.block_height * game.player_height);
-		if (player_height < this.app_height - height * game.scale * game.block - 12) {
-			this.world.y += Math.max(0.5, ((this.app_height - height * game.scale * game.block - 12) - player_height)/30);
+		if (player_height < this.app_height - height * game.scale * game.block - (game.player_pixel_height) * game.scale) {
+			this.world.y += Math.max(0.5, ((this.app_height - height * game.scale * game.block - (game.player_pixel_height) * game.scale) - player_height)/30);
 			this.cull_rows();
 			this.cull_cars();
 		}
@@ -59,8 +59,9 @@ class World {
 
 	calculate_collisions() {
 		let car_index;
-		for (let i = 0; this.cars[i].height <= this.player.height; i++)
+		for (let i = 0; i < this.cars.length && this.cars[i].height <= this.player.height; i++) {
 			if (this.cars[i].height == this.player.height) car_index = i;
+		}
 
 		if (car_index != undefined) {
 			const cars = this.cars_container.children[car_index].children;
@@ -68,7 +69,7 @@ class World {
 			for(const car of cars) {
 				const direction = this.cars[car_index].direction/2;
 				const distance = playerx - car.getGlobalPosition().x;
-				if (distance >=  (direction-0.5) * car.width - 7*game.scale && distance <= (direction+0.5) * car.width + 7*game.scale)
+				if (distance >=  (direction-0.5) * (car.width-1*game.scale) - 7*game.scale && distance <= (direction+0.5) * (car.width-1*game.scale) + 7*game.scale)
 					return true;
 			}
 		}

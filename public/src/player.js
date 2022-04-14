@@ -13,7 +13,7 @@ class Player {
 		this.sprite = new pixi.sprite(pixi.textures[name]);
 		this.sprite.scale.set(game.scale);
 		this.sprite.anchor.set(0.5, 1);
-		this.sprite.position.set(app.renderer.width/2, app.renderer.height -10);
+		this.sprite.position.set(app.renderer.width/2, app.renderer.height - game.player_pixel_height*game.scale);
 		this.sprite._zIndex = 2;
 
 		this.keys = {
