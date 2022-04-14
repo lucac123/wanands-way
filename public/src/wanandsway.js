@@ -24,7 +24,7 @@ let world, gui;
 
 let setup = () => {
 	world = new World(app);
-	gui = new Gui();
+	gui = new Gui(app, world.player, true);
 	state = single_player;
 	app.ticker.add(game_loop);
 }
@@ -34,7 +34,6 @@ pixi.loader
 	.load(setup);
 
 let game_loop = (delta) => {
-	// console.log(app.ticker.FPS + ' ' + delta);
 	state(delta);
 }
 
