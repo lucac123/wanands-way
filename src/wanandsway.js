@@ -1,4 +1,5 @@
 import { World } from './world.js';
+import { Gui } from './gui.js';
 import { game, pixi } from './constants.js';
 
 
@@ -19,10 +20,11 @@ document.body.appendChild(app.view);
 let state;
 
 // ** OBJECTS
-let world;
+let world, gui;
 
 let setup = () => {
 	world = new World(app);
+	gui = new Gui();
 	state = single_player;
 	app.ticker.add(game_loop);
 }
@@ -37,4 +39,13 @@ let game_loop = (delta) => {
 
 let single_player = (delta) => {
 	world.loop();
+	if (world.calculate_collisions()) {
+		state = game_over;
+		world.end();
+	}
+	gui.draw(delta);
+}
+
+let game_over = (delta) => {
+
 }

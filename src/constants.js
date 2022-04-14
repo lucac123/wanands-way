@@ -1,4 +1,4 @@
-export { prng, game, pixi };
+export { prng, game, pixi, cars };
 
 // * NOISE CONSTANTS
 const prng = {
@@ -34,19 +34,38 @@ const cars = {
 		'car_red.png'
 	],
 	freq: [
-		0.15,
-		0.25,
-		0.25,
-		0.2,
-		0.1,
-		0.05
+		1,
+		1,
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		6,
+		5,
+		4,
+		3,
+		2
 	],
 	thresholds: [],
-	width: 4000
+	width: 4000,
+	block: game.block*2,
+	speed_var: 4,
+	speed_const: 3,
+	speed_denom: 20
 };
+
+let count = 0;
+cars.freq.forEach((n) => {
+	count += n;
+})
 
 let cur = 0;
 cars.freq.forEach((n, i) => {
 	cars.thresholds[i] = cur;
-	cur += n;
+	cur += n/count;
 })
+
+cars.block_width = Math.floor(cars.width/cars.block);
