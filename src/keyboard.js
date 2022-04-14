@@ -2,7 +2,13 @@ export { Key };
 
 class Key {
 	constructor(value) {
+		if (typeof value == 'string')
+			this.multi_val = false;
+		else
+			this.multi_val = true;
 		this.value = value;
+		
+
 		this.isDown = false;
 		this.isUp = true;
 		this.press = undefined;
@@ -15,7 +21,14 @@ class Key {
 	}
 
 	downHandler(event) {
-		if (event.key === this.value) {
+		let isdown = false;
+		if (this.multi_val)
+			this.value.forEach(val => {
+				if (val === event.key) isdown = true;
+			});
+		else
+			isdown = (event.key === this.value);
+		if (isdown) {
 			if (this.isUp && this.press)
 				this.press();
 			this.isDown = true;
@@ -25,7 +38,14 @@ class Key {
 	}
 
 	upHandler(event) {
-		if (event.key === this.value) {
+		let isup = false;
+		if (this.multi_val)
+			this.value.forEach(val => {
+				if (val === event.key) isup = true;
+			});
+		else
+			isup = (event.key === this.value);
+		if (isup) {
 			if (this.isDown && this.release)
 				this.release();
 			this.isDown = false;

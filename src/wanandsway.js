@@ -2,7 +2,6 @@ import { World } from './world.js';
 import { Gui } from './gui.js';
 import { game, pixi } from './constants.js';
 
-
 // * CREATE APPLICATION
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 const app = new pixi.application({
@@ -29,9 +28,11 @@ let setup = () => {
 	app.ticker.add(game_loop);
 }
 
+document.fonts.onloadingdone = () => {
 pixi.loader
 	.add('images/assets.json')
 	.load(setup);
+}
 
 let game_loop = (delta) => {
 	state(delta);

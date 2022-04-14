@@ -33,7 +33,7 @@ const pixi = {
 // * TEXT STYLES
 const text  = {
 	dogica_regular: {
-		fontFamily: 'DogicaPixelRegular',
+		fontFamily: 'Dogica',
 		fontweight: 'regular',
 		fill: 'white',
 		fontSize: '50pt'
