@@ -25,6 +25,15 @@ class Noise {
 		}
 		return ((prng.a * rand_seed) % prng.m) / prng.m;
 	}
+
+	// * USED FOR GENERATING RANDOM SEED
+	rand_seed(rand_seed) {
+		if (rand_seed === undefined) {
+			this.x = (prng.a * this.x) % prng.m;
+			return this.x;
+		}
+		return ((prng.a * rand_seed) % prng.m);
+	}
 	
 	// * WORLD GEN BETTER WITHOUT PERLIN, REMOVED
 	// perlin(x) {
