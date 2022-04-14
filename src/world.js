@@ -69,7 +69,7 @@ class World {
 			for(const car of cars) {
 				const direction = this.cars[car_index].direction/2;
 				const distance = playerx - car.getGlobalPosition().x;
-				if (distance >=  (direction-0.5) * (car.width-1*game.scale) - 7*game.scale && distance <= (direction+0.5) * (car.width-1*game.scale) + 7*game.scale)
+				if (distance >=  (direction-0.5) * (car.width) - 6*game.scale && distance <= (direction+0.5) * (car.width) + 6*game.scale)
 					return true;
 			}
 		}
