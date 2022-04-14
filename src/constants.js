@@ -1,4 +1,4 @@
-export { prng, game, pixi, cars };
+export { prng, game, pixi, cars, text };
 
 // * NOISE CONSTANTS
 const prng = {
@@ -25,8 +25,25 @@ const pixi = {
 	textures: PIXI.utils.TextureCache,
 	loader: PIXI.Loader.shared,
 	sprite: PIXI.Sprite,
-	tiling_sprite: PIXI.TilingSprite
+	tiling_sprite: PIXI.TilingSprite,
+	text: PIXI.Text,
+	text_style: PIXI.TextStyle
 }
+
+// * TEXT STYLES
+const text  = {
+	dogica_regular: {
+		fontFamily: 'DogicaPixelRegular',
+		fontweight: 'regular',
+		fill: 'white',
+		fontSize: '50pt'
+	},
+	dogica_bold: {
+		fontFamily: 'DogicaPixelBold',
+		fontweight: 'bold',
+		fill: 'white'
+	}
+};
 
 // * CAR PICTURE NAMES
 const cars = {
