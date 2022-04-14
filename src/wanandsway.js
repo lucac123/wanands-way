@@ -34,6 +34,7 @@ pixi.loader
 	.load(setup);
 
 let game_loop = (delta) => {
+	// console.log(app.ticker.FPS + ' ' + delta);
 	state(delta);
 }
 
@@ -43,7 +44,7 @@ let single_player = (delta) => {
 		state = game_over;
 		world.end();
 	}
-	gui.draw(delta);
+	gui.draw_fps(delta);
 }
 
 let game_over = (delta) => {
