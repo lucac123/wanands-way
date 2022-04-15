@@ -34,14 +34,14 @@ const pixi = {
 const text  = {
 	dogica_regular: {
 		fontFamily: 'Dogica',
-		fontweight: 'regular',
 		fill: 'white',
 		fontSize: '50pt'
 	},
 	dogica_bold: {
-		fontFamily: 'DogicaPixelBold',
-		fontweight: 'bold',
-		fill: 'white'
+		fontFamily: 'Dogica',
+		fontWeight: 'bold',
+		fill: 'white',
+		fontSize: '100pt'
 	}
 };
 

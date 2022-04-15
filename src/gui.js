@@ -4,9 +4,12 @@ export { Gui };
 
 class Gui {
 	constructor(app, player, debug) {
+		this.dead = false;
+		this.app = app;
 		this.gui = new pixi.container();
 		this.debug = debug;
 		this.dogica_regular = new pixi.text_style(text.dogica_regular);
+		this.dogica_bold = new pixi.text_style(text.dogica_bold);
 
 		this.player = player;
 
@@ -48,5 +51,14 @@ class Gui {
 		text_sprite.x = x;
 		text_sprite.y = y;
 		return text_sprite;
+	}
+
+	game_over() {
+		let game_over = new pixi.text('AYO CMON NOW', this.dogica_bold);
+		game_over.anchor.set(0.5, 0.5);
+		game_over.x = this.app.renderer.width/2;
+		game_over.y = this.app.renderer.height/2;
+		this.gui.addChild(game_over);
+		this.dead = true;
 	}
 }

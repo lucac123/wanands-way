@@ -28,11 +28,11 @@ let setup = () => {
 	app.ticker.add(game_loop);
 }
 
-document.fonts.onloadingdone = () => {
+document.fonts.ready.then( () => {
 pixi.loader
 	.add('images/assets.json')
 	.load(setup);
-}
+});
 
 let game_loop = (delta) => {
 	state(delta);
@@ -48,5 +48,6 @@ let single_player = (delta) => {
 }
 
 let game_over = (delta) => {
-
+	if (!gui.dead)
+		gui.game_over();
 }
