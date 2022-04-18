@@ -4,61 +4,66 @@ export { Gui };
 
 class Gui {
 	constructor(app, player, debug) {
-		this.dead = false;
 		this.app = app;
 		this.gui = new pixi.container();
-		this.debug = debug;
-		this.dogica_regular = new pixi.text_style(text.dogica_regular);
-		this.dogica_bold = new pixi.text_style(text.dogica_bold);
+		this.score_style = new pixi.text_style(text.score);
+		this.gameover_style = new pixi.text_style(text.gameover);
+		this.debug_style = new pixi.text_style(text.debug);
 
 		this.player = player;
+		
+		this.debug = debug;
+
+		this.gen_text_sprites();
 
 		if (this.debug) {
+			this.debug_timer = Date.now();
+			this.debug_text.visible = true;
 			this.fps = 60;
-			this.fps_text = this.make_debug(this.fps + ' fps', 10, 10);
-			
-			this.gui.addChild(this.fps_text);
 		}
 
-		this.score = new pixi.text(0, this.dogica_regular);
-		this.score.anchor.set(0.5, 0);
-		this.score.position.set(app.renderer.width/2, 10);
-		// this.score.scale.set(0.4, 0.4);
-		this.gui.addChild(this.score);
 
 		document.body.addEventListener('score', this.set_score.bind(this));
 
 		app.stage.addChild(this.gui);
 	}
 
-	set_score() {
-		this.score.text = this.player.score;
-	}
-
-	draw_fps(delta) {
+	loop() {
 		if (this.debug) {
-			const temp_fps = Math.round(60/delta * 100)/100;
-			if (Math.abs(temp_fps - this.fps) > 10) {
-				this.fps = temp_fps;
-				this.fps_text.text = this.fps + ' fps';
+			if (Date.now() - this.debug_timer > 500) {
+				this.debug_text.text = this.get_fps();
+				this.debug_timer = Date.now();
 			}
 		}
 	}
 
-	make_debug(start, x, y) {
-		const text_sprite = new pixi.text(start, this.dogica_regular);
-		text_sprite.scale.set(0.2, 0.2);
-		text_sprite.x = x;
-		text_sprite.y = y;
-		return text_sprite;
+	gen_text_sprites() {
+		let debug_text = new pixi.text(this.get_fps(), this.debug_style);
+		debug_text.position.set(10, 10);
+		debug_text.visible = false;
+		this.debug_text = debug_text;
+		
+		let score_text = new pixi.text(0, this.score_style);
+		score_text.anchor.x = 0.5;
+		score_text.position.set(this.app.renderer.width/2, 10);
+		this.score_text = score_text;
+		
+		let gameover_text = new pixi.text('AYO CMON NOW', this.gameover_style);
+		gameover_text.anchor.set(0.5, 0.5);
+		gameover_text.position.set(this.app.renderer.width/2, this.app.renderer.height/2);
+		gameover_text.visible = false;
+		this.gameover_text = gameover_text;
+		
+		this.gui.addChild(this.debug_text);
+		this.gui.addChild(this.score_text);
+		this.gui.addChild(this.gameover_text);
 	}
 
-	game_over() {
-		let game_over = new pixi.text('AYO CMON NOW', this.dogica_bold);
-		game_over.anchor.set(0.5, 0.5);
-		game_over.x = this.app.renderer.width/2;
-		game_over.y = this.app.renderer.height/2;
-		this.gui.addChild(game_over);
-		this.dead = true;
+	get_fps() {
+		return `${Math.floor(this.app.ticker.FPS * 100)/100} fps`;
+	}
+
+	set_score() {
+		this.score_text.text = this.player.score;
 	}
 }

@@ -9,6 +9,7 @@ export { World };
 
 class World {
 	constructor(app) {
+		this.world_start = Date.now();
 		this.seed = Math.floor(Math.random() * prng.m);
 		// this.seed = 12039120;
 		this.noise = new Noise(this.seed);
