@@ -32,16 +32,21 @@ const pixi = {
 
 // * TEXT STYLES
 const text  = {
-	dogica_regular: {
+	score: {
 		fontFamily: 'Dogica',
 		fill: 'white',
 		fontSize: '50pt'
 	},
-	dogica_bold: {
+	debug: {
+		fontFamily: 'Dogica',
+		fill: 'white',
+		fontSize: '10pt'
+	},
+	gameover: {
 		fontFamily: 'Dogica',
 		fontWeight: 'bold',
-		fill: 'white',
-		fontSize: '100pt'
+		fill: 'red',
+		fontSize: '80pt'
 	}
 };
 
