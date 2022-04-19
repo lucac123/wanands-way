@@ -32,6 +32,7 @@ pixi.loader
 	.add('images/assets.json')
 	.load(setup);
 
+
 let game_loop = (delta) => {
 	state(delta);
 }
