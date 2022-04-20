@@ -12,10 +12,17 @@
 				padding: 0;
 				overflow: hidden;
 			}
+			#font-loader {
+				opacity: 0;
+				position: absolute;
+			}
 		</style>
 	</head>
 	<body>
-		<div style="font-family: dogica; font-weight: bold"></div>
+		<div id='font-loader'>
+			<div style="font-family: dogica; font-weight: bold">a</div>
+			<div style="font-family: dogica">a</div>
+		</div>
 		<div id='console'></div>
 		<script type="module" src="src/wanandsway.js"></script>
 	</body>
