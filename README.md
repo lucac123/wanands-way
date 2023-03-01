@@ -1,5 +1,3 @@
-<base target="_blank">
-
 # Wanand's Way
 A crossy-road clone written with PIXI.js and Node.js
 
